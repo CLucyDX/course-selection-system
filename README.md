@@ -95,3 +95,17 @@
    ```bash
    git clone https://github.com/CLucyDX/course-selection-system.git
    cd course-learning-ai-system
+---
+## 展示
+<img width="648" height="351" alt="Image" src="https://github.com/user-attachments/assets/98f4b9e4-c0c2-4b61-acca-b13bf8679165" />
+
+<img width="863" height="390" alt="Image" src="https://github.com/user-attachments/assets/c09c9ae8-d5d8-427a-8c13-2cee4162b2bb" />
+
+<img width="742" height="391" alt="Image" src="https://github.com/user-attachments/assets/10cfafe7-8e72-45e2-b4f6-4b7fc845474e" />
+
+<img width="1034" height="582" alt="Image" src="https://github.com/user-attachments/assets/2dc160bb-1919-4431-962a-b350e30b1b84" />
+
+<img width="1035" height="585" alt="Image" src="https://github.com/user-attachments/assets/7371fbd4-d29d-41c0-8d08-e55ce0aa9210" />
+
+<img width="1036" height="582" alt="Image" src="https://github.com/user-attachments/assets/5a7d7392-9a71-4943-af6e-a987f2782fcc" />
+仅用于展示，实际操作需要完整数据库进行
