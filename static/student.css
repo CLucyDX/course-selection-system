@@ -1,0 +1,357 @@
+.selection_card {
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+}
+  
+.selection_card img {
+    width: 100%;
+    max-height: 40%;
+}
+  
+.selection_card_content {
+    padding: 1rem;
+}
+
+.selection_box {
+    width: 150px; 
+    margin-top: 5%;
+    font-size: 15px;
+}
+
+#result-list {
+    margin-left: 20px;
+}
+
+#result-list li{
+    color: black;
+    margin-bottom: 2px;
+}
+
+#result-list li:hover {
+    background-color: #7e7e7f48;
+    color: white;
+}
+
+#result-list li a{
+    color: black;
+    text-decoration: none;
+}
+
+.list__container {
+    position: relative;
+    padding: 5rem 0 5rem 5rem;
+    flex: 1;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    /* border: 2px solid red; */
+    justify-items: center;
+}
+
+
+.list__container h1 {
+    margin-top: 0rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--white);
+}
+  
+.list__container h1 span {
+    -webkit-text-stroke: 2px var(--white);
+    -webkit-text-fill-color: transparent;
+}
+  
+.list__container p {
+    max-width: 70%;
+    margin-bottom: 2rem;
+    line-height: 1.5rem;
+    color: var(--white);
+    font-size: 30px;
+}
+  
+.list__container .btn {
+    padding: 0.75rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.list_content {
+    overflow-y: auto;
+    text-align: center;
+    /* border: 2px solid red; */
+    width: 100%;
+    align-items: center;
+}
+
+.list_content h1 {
+    margin-bottom: 1rem;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: var(--white);
+}
+  
+.list_content h1 span {
+    -webkit-text-stroke: 2px var(--white);
+    -webkit-text-fill-color: transparent;
+}
+  
+.list_content p {
+    max-width: 750px;
+    /* margin-bottom: 2rem; */
+    line-height: 1.5rem;
+    color: var(--white);
+    margin: 20px auto;
+}
+  
+.list_content .btn {
+    /* padding: 0.75rem 2rem; */
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    display: block; /* 确保按钮是块级元素 */
+    margin: 5px auto; /* 自动左右边距 */
+}
+
+.list_content li a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+
+.list_content li:hover {
+    background-color: #7e7e7f48;
+    color: white;
+}
+
+.list_bg {
+    width: 95%;
+    background: rgba(255, 255, 255, 0.5);
+    text-align: left;
+}
+
+.detail_bg {
+    /* border:  2px solid red; */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    text-align: left;
+}
+
+.detail_bg p {
+    font-size: 20px;
+    margin: 1% 2%;
+}
+
+.detail_bg h3, .detail_bg a, .detail_bg img {
+    margin: 1% 2%;
+}
+
+.detail_bg h3 {
+    font-size: 30px;
+}
+
+.detail_bg li {
+    text-align: center;
+}
+
+.detail_bg button {
+    font-size: 20px;
+    margin: 1% auto;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.popup button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: var(--primary-color-dark);
+}
+
+.popup button.cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.popup button.cancel:hover {
+    background-color: #bbb;
+}
+
+.save-button {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.save-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.search_link {
+    display: flex;
+    gap: 40px; /* 间隔 */
+    justify-content: center; /* 居中对齐 */
+}
+
+.btn-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+
+.btn-link:hover {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+
+.input_bg {
+    width: 95%;
+    background: rgba(255, 255, 255, 0.5);
+    /* text-align: left; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* 设置输入框和提交按钮之间的间隔 */
+    padding: 20px;
+}
+
+.input_bg input[type="text"] {
+    width: 100%;
+    max-width: 300px; /* 限制输入框最大宽度 */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.input_bg table {
+    border-collapse: separate;
+    border-spacing: 0 10px; /* 每个tr之间的间隔 */
+}
+
+.input_bg td {
+    padding: 10px 30px; /* 单元格内边距 */
+    text-align: center; /* 单元格内文本居中 */
+}
+
+.submit-btn {
+    width: 100%;
+    max-width: 150px; /* 限制按钮最大宽度 */
+    padding: 10px 20px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: var(--secondary-color);
+}
+
+.input_bg table {
+    border-collapse: separate;
+    border-spacing: 0 10px; /* 每个tr之间的间隔 */
+}
+
+.table_td a{
+    /* border: 2px solid red; */
+    text-decoration: none; /* 去除超链接的下划线 */
+    color: inherit; /* 继承父元素的颜色 */
+}
+
+.topic-row {
+    transition: background-color 0.3s ease;
+    font-size: 40px;
+}
+
+.topic-row:hover {
+    background-color: #b1b1b178; /* 鼠标悬停时的背景颜色 */
+}
+
+.student2 {
+    padding: 5px;
+    /* border: 2px solid red; */
+}
+
+.student2 table{
+    /* padding: 10px; */
+    /* border: 2px solid blue; */
+    width: 100%;
+    text-align: center;
+}
+
+.student2 td, .student2 th {
+    padding: 20px;
+    border: 2px solid black;
+}
+
+.student2 th {
+    font-size: 20px;
+}
+
+.student2 td {
+    font-size: 10px;
+    font-weight: bold;
+}

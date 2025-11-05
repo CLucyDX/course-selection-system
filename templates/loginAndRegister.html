@@ -1,0 +1,97 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Website With Login and Registration</title> 
+    <link rel="stylesheet" href="../static/loginStyle.css">
+</head>  
+<body>  
+    <header>
+        <h2 class="logo">Logo</h2>
+        <nav class="navigation">
+            <a href="#">Home</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
+            <a href="#">Contact</a>
+            <button class="btnLogin-popup">Login</button>
+        </nav>
+    </header>
+
+    <div class="wrapper active-popup">
+        <span class="icon-close">
+            <ion-icon name="close"></ion-icon>
+        </span>
+
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form id="loginForm" method="post" action="{{ url_for('login.loginAndRegister') }}" onsubmit="return validateForm()">  
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
+                    <input type="text" id="email" name="email" required> 
+                    <label>Email</label>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
+                    <input type="password" id="password" name="password" required>
+                    <label>Password</label>
+                </div>
+                <div class="remember-forgot">
+                    <!-- <label><input type="checkbox">
+                    Remember me</label>
+                    <a href="#">Forgot Password?</a> -->
+                    <input type="radio" id="role_student" name="role" value="S" required>  
+                    <label for="role_student">Student</label>  
+                
+                    <input type="radio" id="role_teacher" name="role" value="T" required>  
+                    <label for="role_teacher">Teacher</label>  
+                
+                    <input type="radio" id="role_admin" name="role" value="A" required>  
+                    <label for="role_admin">Administrator</label> 
+                </div>
+                <button class="btn" type="submit" value="Login">Login</button>
+                <div class="login-register">
+                    <p style="color: rgb(253, 249, 249);">Don't have an account?
+                        <a href="#" class="register-link" style="color: rgb(253, 249, 249);">Register</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+        <div class="form-box register">
+            <h2>Registration</h2>
+            <form id="registerForm" method="post" action="{{ url_for('login.loginAndRegister') }}">
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="person"></ion-icon>
+                    </span>
+                    <input type="text" id="registerEmail" name="email" required>
+                    <label>Email</label>
+                </div>
+                <!-- <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="lock-closed"></ion-icon>
+                    </span>
+                    <input type="password" required>
+                    <label>Password</label>
+                </div> -->
+                <!-- <div class="remember-forgot"> -->
+                    <!-- <label><input type="checkbox">
+                    I agree to the terms and conditions</label> -->
+                <!-- </div> -->
+                <button class="btn" type="submit" value="Submit Application">Submit Application</button>  
+                <p id="errorMsg" class="text-danger"></p>
+                <div class="login-register">
+                    <p style="color: rgb(253, 249, 249);">Already have an account?
+                        <a href="#" class="login-link" style="color: rgb(253, 249, 249);">Login</a>
+                    </p>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../static/loginScript.js"></script> 
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>  
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <link rel="stylesheet" href="../static/admin.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link">
+            {% if ut == 'A' %}
+              <a href="{{ url_for('admin.admin_pages', email=email) }}">Home</a>
+            {% elif ut == 'T' %}
+              <a href="{{ url_for('teacher.teacherhome', email=email) }}">Home</a>
+            {% elif ut == 'S' %}
+              <a href="{{ url_for('student.studentHomePage', email=email) }}">Home</a>
+            {% endif %}
+          </li>
+          <li class="link"><a href="{{url_for('teacher.teacherSelection')}}">Search By</a></li>
+          <li class="link"><a href="/make_request?email={{ email }}">Make Request</a></li>
+          <li  class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-icon">▼</div>
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="destination__container">
+        <img class="bg__img__1" src="../static/bg-dots.png" alt="bg" />
+        <img class="bg__img__2" src="../static/bg-arrow.png" alt="bg" />
+        <div class="socials">
+          <span><i class="ri-twitter-fill"></i></span>
+          <span><i class="ri-facebook-fill"></i></span>
+          <span><i class="ri-instagram-line"></i></span>
+          <span><i class="ri-youtube-fill"></i></span>
+        </div>
+        <div class="content">
+          <h1>WELCOME<br />ADMIN<br /><span>{{name}}</span></h1>
+          <p>
+            As stewards, we are charged with maintaining order and providing service. Our goal is to provide users with a safe and comfortable environment where they can reach their full potential. In this role, we need to maintain an efficient, impartial and responsible working attitude to deal with various emergencies and problems. At the same time, we must continue to learn and improve our capabilities to better respond to various challenges and needs. Let us work together to create a harmonious and beautiful community environment!
+          </p>
+          <button class="btn">User Guide</button>
+        </div>
+
+        <!-- 展示页 -->
+        <div class="selection_card">
+            <img src="../static/destination-1.jpg" alt="destination" />
+            <div class="selection_card_content">
+                <h4>Ready to handle requests?</h4>
+                <p>
+                    Click "Handle" and the administrator can process the request
+                </p>
+                <form id="handle_form" action="/handle_page" method="post">
+                    <input type="hidden" name="email" value="{{ email }}">
+                    <button class="admin_btn" type="button" onclick="document.getElementById('handle_form').submit();">Handle</button>
+                </form>
+            </div>
+          </div>
+      </div>
+    </div>
+    
+    <script>
+      // 以下是全体框架
+      var icon = document.querySelector('.dropdown-icon');
+      var menu = document.querySelector('.dropdown-menu');
+  
+      var assignments_list = {{ assignments_list|tojson|safe }}; // 将后端传来的问题列表转换为 JavaScript 对象
+      var course_names = {{ course_names|tojson|safe }};
+      icon.addEventListener('click', function() {
+          if (menu.style.display === 'block') {
+              menu.style.display = 'none';
+          } else {
+              menu.style.display = 'block';
+          }
+      });
+  
+      //<!-- 全局搜索 -->
+      $(document).ready(function(){
+          $('#a').on('input', function(){
+              var searchTerm = $(this).val();
+              updateList(searchTerm);
+          });
+  
+          $('.search_box').mouseenter(function() {
+              $('.a').css('width', '300px');
+              $('#b_results').show();
+          }).mouseleave(function() {
+              var searchTerm = $('#a').val();
+              if (searchTerm.trim() === '') {
+                  $('.a').css('width', '0');
+                  $('#b_results').hide();
+              }
+              else{
+                  $('.a').css('width', '300px');
+                  $('#b_results').show();
+              }
+          });
+      });
+      function updateList(searchTerm) {
+          $('#b_results').empty();
+          $('#b_results').append('<ul>');
+          $('#b_results ul').css('list-style-type', 'none');
+          var count = 0; // 计数器，用于限制显示数量
+          if (searchTerm.trim() !== '') { // 检查搜索框中是否有内容
+              $('.a').css('width', '300px'); // 如果有内容，设置搜索框宽度为300px
+          } 
+          $.each(course_names, function(index, course_name){
+              if (course_name.course_name.toLowerCase().includes(searchTerm.toLowerCase())){
+                  if (count < 5) { // 这里显示10个内容
+                      $('#b_results ul').append('<li class="b_item">' + course_name.course_name + '</li>');
+                      count++;
+                  }
+              }
+          });
+          $.each(assignments_list, function(index, assignments){
+              if (assignments.q_text.toLowerCase().includes(searchTerm.toLowerCase())){
+                  if (count < 5) { // 这里显示10个内容
+                      $('#b_results ul').append('<li class="b_item">' + assignments.q_text + '</li>');
+                      count++;
+                  }
+              }
+          });
+          $('#b_results').append('</ul>');
+      }
+      $(document).on('click', '.b_item', function(){
+          var selectedQuestion = $(this).text();
+          $('#a').val(selectedQuestion); 
+          $('#b_results').empty(); 
+      });
+      function submitSearch() {
+          document.getElementById("search_form").submit();
+      }
+  </script>
+
+    <script src="../static/navigation.js"></script> 
+  </body>
+</html>

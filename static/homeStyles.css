@@ -1,0 +1,378 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --primary-color: #00605f;
+  --secondary-color: #017479;
+  --text-dark: #0f172a;
+  --text-light: #94a3b8;
+  --white: #ffffff;
+  --max-width: 1400px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(
+      to right,
+      rgba(2, 82, 89, 0.9),
+      rgba(255, 255, 255, 0)
+    ),
+    url("bg.jpg");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.container {
+  max-width: var(--max-width);
+  min-height: 100vh;
+  margin: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.nav__logo img {
+  max-width: 70px;
+}
+
+.nav__links {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.link a {
+  text-decoration: none;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.search {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: var(--white);
+  border-radius: 2rem;
+  transition: 0.3s;
+}
+
+.search input {
+  width: 100%;
+  font-size: 1rem;
+  color: var(--primary-color);
+  outline: none;
+  border: none;
+}
+
+.search input::placeholder {
+  color: var(--secondary-color);
+}
+
+.search span {
+  font-size: 1.5rem;
+  color: var(--primary-color);
+}
+.search :hover .b{ /* 展开后搜索显示 */
+  background-color: rgb(252, 252, 251);
+}
+.b{
+  color: #1f6218; /* 未展开颜色 */
+  float: right;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #b4cae9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .4s;
+}
+.b_results {
+  position: absolute;
+  top: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  width: 300px;
+  background-color: #1f6218;
+  border-radius: 10px;
+  padding: auto;
+  display: flex; 
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}
+
+.login {
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--primary-color);
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.login:hover {
+  background-color: var(--secondary-color);
+}
+
+.destination__container {
+  position: relative;
+  padding: 5rem 0 5rem 5rem;
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.bg__img__1 {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-100%);
+  opacity: 0.6;
+  z-index: -1;
+}
+
+.bg__img__2 {
+  position: absolute;
+  bottom: 2rem;
+  right: 50%;
+  transform: translateX(100%);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.socials {
+  position: absolute;
+  top: 25rem;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.socials::after {
+  position: absolute;
+  content: "";
+  top: -22rem;
+  left: 15px;
+  height: 15rem;
+  width: 2px;
+  background-color: var(--white);
+}
+
+.socials span {
+  font-size: 2rem;
+  color: var(--white);
+}
+
+.content h1 {
+  margin-bottom: 1rem;
+  font-size: 4.5rem;
+  font-weight: 800;
+  color: var(--white);
+}
+
+.content h1 span {
+  -webkit-text-stroke: 2px var(--white);
+  -webkit-text-fill-color: transparent;
+}
+
+.content p {
+  max-width: 350px;
+  margin-bottom: 2rem;
+  line-height: 1.5rem;
+  color: var(--white);
+}
+
+.content .btn {
+  padding: 0.75rem 2rem;
+  outline: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--white);
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+.href-btn{
+  text-decoration: none;
+  color: white;
+}
+
+.destination__grid {
+  /* 将元素设置为网格布局容器。网格布局是一种二维布局系统，可以同时处理行和列 */
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.destination__card {
+  height: 100%;
+  background-color: var(--white);
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+}
+
+.destination__card img {
+  width: 100%;
+  max-height: 30%;
+}
+
+.card__content {
+  padding: 1rem;
+}
+
+.card__content h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.card__content p {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.5rem;
+  color: var(--text-light);
+}
+
+.card__content .btn {
+  padding: 0.5rem 1rem;
+  outline: none;
+  border: none;
+  font-weight: 500;
+  color: var(--white);
+  background-color: var(--primary-color);
+  cursor: pointer;
+}
+
+@media (width < 1200px) {
+  .search {
+    max-width: 235px;
+  }
+
+  .destination__container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (width < 900px) {
+  .nav__links {
+    display: none;
+  }
+
+  .content h1 {
+    font-size: 4rem;
+  }
+
+  .destination__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width < 600px) {
+  .search {
+    display: none;
+  }
+
+  .destination__container {
+    padding-left: 3rem;
+  }
+
+  .content h1 {
+    font-size: 3rem;
+  }
+
+  .destination__grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+
+/* pyx */
+.c{
+  top:2px;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  background-color: #ffffff; /* 默认头像背景色 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  cursor: auto;
+}
+.d{
+  width: 80px;
+  height: 50px;
+  left:10px;
+  background-color: #72afd3;
+  display: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  overflow: hidden; 
+  text-overflow: ellipsis; 
+  white-space: nowrap; 
+  text-align: right;
+  cursor: auto;
+}
+
+.dropdown-menu {
+  display: none; /* 初始状态下隐藏下拉菜单 */
+  position: absolute; /* 绝对定位，相对于父元素 .user */
+  top: 100%; /* 位于父元素底部 */
+  right: 2px;
+  width: 200px;
+  background-color: #fff; /* 背景颜色 */
+  border: 1px solid #ccc; /* 边框 */
+  padding: 2px; /* 内边距 */
+}
+.dropdown-menu ul {
+  display: flex;
+  flex-direction: column; /* 竖直排列 */
+  align-items: center; /* 在交叉轴上居中对齐 */
+  font-size: 16px;
+}
+
+.dropdown-menu li {
+  margin-bottom: 5px; /* 在菜单项之间添加一些间距 */
+  list-style: none;
+}
+
+.b_results {
+  position: absolute;
+  top: 100%;
+  max-height: 240px;
+  overflow-y: auto;
+  width: 300px;
+  background-color: #b4cae9;
+  border-radius: 10px;
+  padding: auto;
+  display: flex; 
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+}

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <link rel="stylesheet" href="../static/teacher.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/navigation.js"></script> 
+    <!-- <script src="../static/questionList.js"></script>  -->
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link"><a href="{{ url_for('teacher.teacherhome',email=email) }}">Home</a></li>
+          <li class="link"><a href="{{url_for('teacher.teacherSelection')}}">Search By</a></li>
+          <li class="link"><a href="/make_request?email={{ email }}">Make Request</a></li>
+          <li class="link"><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-icon">▼</div>
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="list__container">
+            <img class="bg__img__2" src="../static/bg-arrow.png" alt="bg" />
+            <div class="socials">
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-youtube-fill"></i></span>
+            </div>
+            <div class="list_content">
+                <h1>Question List for <br /> {{ course_name_or_category }}</h1>
+                <p>
+                    Below is the list of questions, please click the question you are interested in to see the details.
+                </p>
+                <div class="list_bg">
+                    <button id="selectLLMScoreRangeBtn" class="btn" onclick="showScoreRangePopup()">Select LLM Score Range</button>
+
+                    <ul>
+                        {% if questions %}
+                            {% for question in questions %}
+                                <br><br>
+                                <li><a href="{{ url_for('teacher.questionDetail', q_id=question.q_id) }}">{{ question.q_id }}: {{ question.q_text }}</a></li>
+                            {% endfor %}
+                        {% else %}
+                            {% for index in range(q_texts|length) %}
+                                <br><br>
+                                <li><a href="{{ url_for('teacher.questionDetail', q_id=q_ids[index]) }}">{{ q_ids[index] }}: {{ q_texts[index] }}</a></li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
+                    <br>
+
+                    <div id="scoreRangePopup" class="popup">
+                        <h2>Choose score range</h2>
+                        <button onclick="selectScoreRange('03')">0-3</button>
+                        <button onclick="selectScoreRange('35')">3-5</button>
+                        <button onclick="hideScoreRangePopup()">Cancel</button>
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+
+    <!-- 包含 courseQuestionScore 的 URL -->
+    <script>
+        var courseQuestionScoreUrl = "{{ url_for('teacher.courseQuestionScore') }}";
+
+        function showScoreRangePopup() {
+            document.getElementById("scoreRangePopup").style.display = "block";
+        }
+
+        function hideScoreRangePopup() {
+            document.getElementById("scoreRangePopup").style.display = "none";
+        }
+
+        function selectScoreRange(range) {
+            var course_name_or_category = "{{ course_name_or_category }}";
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", courseQuestionScoreUrl, true);  // 使用传递的 URL
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    document.body.innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send(JSON.stringify({
+                course_name_or_category: course_name_or_category,
+                score_range: range
+            }));
+            hideScoreRangePopup();
+        }
+
+    </script>
+    <script>
+      function showScoreRangePopup() {
+          document.getElementById("scoreRangePopup").style.display = "block";
+      }
+
+      function hideScoreRangePopup() {
+          document.getElementById("scoreRangePopup").style.display = "none";
+      }
+
+      function selectScoreRange(range) {
+          var course_name_or_category = "{{ course_name_or_category }}";
+          var xhr = new XMLHttpRequest();
+          xhr.open("POST", courseQuestionScoreUrl, true);  // 使用传递的 URL
+          xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+          xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4 && xhr.status === 200) {
+                  document.body.innerHTML = xhr.responseText;
+              }
+          };
+          xhr.send(JSON.stringify({
+              course_name_or_category: course_name_or_category,
+              score_range: range
+          }));
+          hideScoreRangePopup();
+      }
+
+    </script>
+  </body>
+</html>

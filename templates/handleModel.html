@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <link rel="stylesheet" href="../static/admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="../static/navigation.js"></script> 
+    <script src="../static/request.js"></script> 
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link">
+            {% if ut == 'A' %}
+                    <a href="{{ url_for('admin.admin_pages', email=email) }}">Home</a>
+                {% elif ut == 'T' %}
+                    <a href="{{ url_for('teacher.teacherhome', email=email) }}">Home</a></div>
+                {% elif ut == 'S' %}
+                    <a href="{{ url_for('student.studentHome', email=email) }}">Home</a></div>
+                {% endif %}
+          </li>
+          <li class="link"><a href="{{url_for('teacher.teacherSelection')}}">Search By</a></li>
+          <li class="link"><a href="/make_request?email={{ email }}">Make Request</a></li>
+          <li class="link"><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-icon">▼</div>
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="list__container">
+            <div class="socials">
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-youtube-fill"></i></span>
+            </div>
+            <div class="admin_list_content">
+                <h1>Pending Request</h1>
+                <p>
+                    Below is the list of questions, please click the question you are interested in to see the details.
+                </p>
+                <div class="detail_bg">
+                    <table id="myTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Type</th>
+                                <th>Reason</th>
+                                <th>Status</th>
+                                <th>Score</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for req in requests %}
+                            <tr>
+                                <td>{{ req.r_id }}</td>
+                                <td>{{ req.r_type }}</td>
+                                <td>{{ req.r_explanation }}</td>
+                                <td>{{ req.r_status }}</td>
+                                <td>{{ req.score }}</td>
+                                <td>
+                                    {% if req.r_status == "In Review" %}
+                                    <form action="/Approve" method="post">
+                                        <input type="hidden" name="request_id" value="{{ req.r_id }}">
+                                        <input type="hidden" name="request_type" value="{{ req.r_type }}">
+                                        <input type="hidden" name="request_course" value="{{ req.course_name }}">
+                                        <input type="hidden" name="course_type" value="{{ req.course_cat }}">
+                                        <input type="hidden" name="re_status" value="{{ req.r_status }}">
+                                        <input type="hidden" name="request_email" value="{{ req.email }}">
+                                        <input type="hidden" name="request_explanation" value="{{ req.r_explanation }}">
+                                        <input type="hidden" name="request_question" value="{{ req.q_text }}">
+                                        <input type="hidden" name="request_score" value="{{ req.score }}">
+                                        <input type="hidden" name="request_answer" value="{{ req.answer }}">
+                                        <input type="hidden" name="request_q_id" value="{{ req.q_id }}">
+                                        <input type="hidden" name="request_llms" value="{{ req.llmtype }}">
+                                        <input type="hidden" name="email" value="{{ email }}">
+                                        <button type="submit" class="btn-action" name="e" value="1">Execute</button>
+                                        <button type="submit" class="btn-action" name="r" value="0">Reject</button>
+                                    </form>
+                                    {% else %}
+                                    <button disabled class="btn-disabled">{{ req.r_status }}</button>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="filter-buttons">
+                        <button onclick="filterTable('ADD_COURSE')">Show Type ADD_COURSE</button>
+                        <button onclick="filterTable('UPDATE_SCORE')">Show Type UPDATE_SCORE</button>
+                        <button onclick="filterTable('CHANGE')">Show Type CHANGE</button>
+                        <button onclick="filterTable('C')">Show All</button>
+                    </div>
+
+                    <div class="pagination">
+                        {% if page > 1 %}
+                        <a class="page-link" href="{{ url_for('request.to_handle', page=page - 1, email=email) }}">Previous</a>
+                        {% endif %}
+                        <span class="page-number">Page {{ page }} of {{ num_pages }}</span>
+                        {% if page < num_pages %}
+                        <a class="page-link" href="{{ url_for('request.to_handle', page=page + 1, email=email) }}">Next</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+      </div>
+    </div>
+
+  </body>
+</html>

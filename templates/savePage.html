@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page B</title>
+<script>
+function toggleInputState(checkbox) {
+    var inputField = document.getElementById(checkbox.id + "-input");
+    inputField.disabled = !checkbox.checked;
+}
+
+function submitForm() {
+    alert("保存成功");
+}
+</script>
+<style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            margin-bottom: 10px;
+            display: block;
+        }
+        input[type="checkbox"] {
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        input[type="text"] {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<form onsubmit="submitForm()">
+    <label><input type="checkbox" id="option1" onchange="toggleInputState(this)"> Option 1</label><br>
+    <input type="text" id="option1-input" disabled><br>
+    <label><input type="checkbox" id="option2" onchange="toggleInputState(this)"> Option 2</label><br>
+    <input type="text" id="option2-input" disabled><br>
+    <label><input type="checkbox" id="option3" onchange="toggleInputState(this)"> Option 3</label><br>
+    <input type="text" id="option3-input" disabled><br>
+    <label><input type="checkbox" id="option4" onchange="toggleInputState(this)"> Option 4</label><br>
+    <input type="text" id="option4-input" disabled><br>
+    <label><input type="checkbox" id="option5" onchange="toggleInputState(this)"> Option 5</label><br>
+    <input type="text" id="option5-input" disabled><br>
+    <label><input type="checkbox" id="option6" onchange="toggleInputState(this)"> Option 6</label><br>
+    <input type="text" id="option6-input" disabled><br>
+    <input type="submit" value="提交">
+</form>
+</body>
+</html>

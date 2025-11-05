@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <link rel="stylesheet" href="../static/teacher.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link"><a href="{{ url_for('teacher.teacherhome',email=email) }}">Home</a></li>
+          <li class="link"><a href="{{url_for('teacher.teacherSelection')}}">Search By</a></li>
+          <li class="link"><a href="/make_request?email={{ email }}">Make Request</a></li>
+          <li class="link"><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="destination__container">
+        <img class="bg__img__1" src="../static/bg-dots.png" alt="bg" />
+        <img class="bg__img__2" src="../static/bg-arrow.png" alt="bg" />
+        <div class="socials">
+          <span><i class="ri-twitter-fill"></i></span>
+          <span><i class="ri-facebook-fill"></i></span>
+          <span><i class="ri-instagram-line"></i></span>
+          <span><i class="ri-youtube-fill"></i></span>
+        </div>
+        <div class="content">
+          <h1>WELCOME<br />TEACHER<br /><span>{{name}}</span></h1>
+          <p>
+            On the road of education, teachers are the guides and examples of students. Adhere to the mission of teaching and educating people, and adhere to contributing to the growth of students. Every student is a shining seed that needs patient watering and care. Let us have hope, education, so that the spark of knowledge ignited students' dreams; Let's stick to our original intention, spread positive energy, and lead students to a bright future. Education is a kind of dedication, but also a commitment, let us go hand in hand, let each student's smile become the most beautiful landscape.
+          </p>
+        </div>
+        <!-- <div class="destination__grid"> -->
+          <div class="selection_card">
+            <img src="../static/destination-1.jpg" alt="destination" />
+            <div class="selection_card_content">
+              <h4>What do you want to search by?</h4>
+              <p>
+                Click "Search By" and search for assignment questions by course name, course category, or LLM score range.
+              </p>
+              <select id="course-selector" class="selection_box">  
+                <option value="select">Select</option>  
+                <option value="course_name">Course Name</option>  
+                <option value="course_category">Course Category</option>  
+                <option value="LLM_score">LLM Score</option> 
+              </select><br>
+              <select id="score-range" style="display:none;">
+                <option value="select">Select</option>  
+                <option value="03">0-3</option>
+                <option value="35">3-5</option>
+              </select><br>
+              <div id="result-list"></div>
+            </div>
+          </div>
+      </div>
+    </div>
+
+    <script src="../static/navigation.js"></script> 
+    <script src="../static/selection.js"></script> 
+  </body>
+</html>

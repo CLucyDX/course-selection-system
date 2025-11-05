@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link"><a href="{{ url_for('student.studentHomePage') }}">Home</a></li>
+          <li class="link"><a href="{{url_for('student.search')}}">Search By</a></li>
+          <li class="link"><a href="/CheckScoreUpdate?email={{ email }}">Check Request</a></li>
+          <li class="link"><a href="{{url_for('subrequest.submit_request',email = email)}}">Experiment Saving</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/make_request?email={{ email }}">Make Request</a></li>
+                <li><a href="/CheckScoreUpdate?email={{ email }}">Check Update Score</a></li>
+                <li><a href="/experiment?email={{ email }}">Show Experiment</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="destination__container">
+        <img class="bg__img__1" src="../static/bg-dots.png" alt="bg" />
+        <img class="bg__img__2" src="../static/bg-arrow.png" alt="bg" />
+        <div class="socials">
+          <span><i class="ri-twitter-fill"></i></span>
+          <span><i class="ri-facebook-fill"></i></span>
+          <span><i class="ri-instagram-line"></i></span>
+          <span><i class="ri-youtube-fill"></i></span>
+        </div>
+        <div class="content">
+          <h1>WELCOME<br />STUDENT<br /><span>{{name}}</span></h1>
+          <p>
+            In this world full of challenges and opportunities, everyone is pursuing their dreams. No matter where you are, no matter what difficulties you face, remember to persevere and be brave. The process of striving is not easy, but it is these challenges that shape us to become better ourselves. Every attempt, every failure is a part of life. They teach us to be tough and learn from failure. No matter when and where, don't give up confidence in yourself, because only perseverance can lead to the other side of success. 
+          </p>
+          <button class="btn">User Guide</button>
+        </div>
+
+        <!-- 展示页 -->
+        <div class="destination__grid">
+          <div class="destination__card">
+            <img src="../static/destination-1.jpg" alt="destination" />
+            <div class="card__content">
+              <h4>You can search for questions</h4>
+              <p>
+                Click "Search By" and search for assignment questions by course name or course category.
+              </p>
+              <button class="btn"><a class="href-btn" href="{{url_for('student.search')}}">Search By</a></button>
+            </div>
+          </div>
+          <div class="destination__card">
+            <img src="../static/destination-2.jpg" alt="destination" />
+            <div class="card__content">
+              <h4>Want to change or update?</h4>
+              <p>
+                Click "Make Request" to make experiment saving requests.
+              </p>
+              <button class="btn"><a class="href-btn" href="{{url_for('subrequest.submit_request',email = email)}}">experiment saving</a></button>
+            </div>
+          </div>
+          <div class="destination__card">
+            <img src="../static/destination-3.jpg" alt="destination" />
+            <div class="card__content">
+                <h4>Want to see your experiment?</h4>
+                <p>
+                    Click "Show Experiment" to view more details about your experiment..
+                </p>
+              <button class="btn"><a class="href-btn" href="/experiment?email={{ email }}">Show Experiment</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="../static/navigation.js"></script> 
+  </body>
+</html>

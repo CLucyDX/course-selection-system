@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../static/homeStyles.css" />
+    <link rel="stylesheet" href="../static/teacher.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <script src="../static/navigation.js"></script> 
+    <script src="../static/questionDetail.js"></script> 
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="../static/uic.jpg" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link"><a href="{{ url_for('teacher.teacherhome',email=email) }}">Home</a></li>
+          <li class="link"><a href="{{url_for('teacher.teacherSelection')}}">Search By</a></li>
+          <li class="link"><a href="/make_request?email={{ email }}">Make Request</a></li>
+          <li class="link"><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-icon">▼</div>
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="list__container">
+            <img class="bg__img__2" src="../static/bg-arrow.png" alt="bg" />
+            <div class="socials">
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-youtube-fill"></i></span>
+            </div>
+            <div class="list_content">
+                <h1>Question Detail</h1>
+                <p>
+                    Below is the list of questions, please click the question you are interested in to see the details.
+                </p>
+                <div class="detail_bg">
+                  <h3>Question Text:</h3>
+                  <p>{{ q_text }}</p>
+                  <h3>Course category:</h3>
+                  <p>{{ course_cat }}</p>
+                  <h3>Course Name:</h3>
+                  <p>{{ course_name }}</p>
+                  <a href="{{ url_for('variation.variation', q_id=q_id) }}" class="variation_link">Click Here to View Variations</a>
+                  <br><br>
+                  <h3>LLM Info</h3>
+                  <ul>
+                      {% for llm in llms %}
+                      <li>
+                          <p class="lllmType">LLM Type: {{ llm.llmtype }}</p>
+                          <p>Score: {{ llm.score }}</p>
+                          <p>Answer Image: </p>
+                          <img src="{{ url_for('static', filename=llm.answer.lstrip('/static/')) }}" alt="Answer Image" style="max-width:300px;max-height:300px;" ondblclick="openImage('{{ url_for('static', filename=llm.answer.lstrip('/static/')) }}')">
+                          <br>
+                          <button class="save-button" data-qtext="{{ q_text }}" data-qcateg="{{ course_cat }}" data-coursename="{{ course_name }}" data-answerimg="{{ llm.answer }}" data-score="{{ llm.score }}">Save</button>
+                      </li>
+                      <br>
+                      {% endfor %}
+                  </ul>
+                </div>
+            </div>
+      </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,205 @@
+*{
+    /* 初始化 */
+    margin: 0;
+    padding: 0;
+}
+body{
+    /*height: 200vh;
+    /* 弹性布局 水平+垂直居中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* 渐变背景 */
+    background: linear-gradient(200deg,#fff,#dfe9f3);
+}
+.navigater{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    background-color: #72afd3;
+}
+.n1{
+    /* 让li水平排列 */
+    display: flex;
+}
+.n1 li{
+    /* 相对定位 */
+    position: relative;
+    list-style: none;
+    top: 0%;
+    width: 160px;
+    height: 50px;
+    /* 光标变小手 */
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: 0.5s;
+}
+.n1 li div{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+}
+/* 每个li元素里的第一个div */
+.n1 li div:first-child{
+    background-color: #72afd3;
+    transform: translateZ(25px);
+}
+/* 每个li元素里的最后一个div */
+.n1 li div:last-child{
+    background-color: #468fb9;
+    transform: translateY(25px) rotateX(-90deg);
+}
+/* 鼠标移入沿X轴旋转90度 */
+.n1 li:hover{
+    transform: rotateX(90deg);
+}
+.txt{
+    position: fixed;
+    top: 0;
+    left: 800px;
+    width: 400px;
+    height: 50px;
+    background-color: #72afd3;
+}
+.search_box{ /* 当前位置为930-950-970（0-50）*/
+    position: fixed;
+    top: 25px;
+    left: 975px;
+    transform: translate(-50%,-50%);
+    background-color: #468fb9;
+    height: 40px;
+    border-radius: 40px;
+    padding: 5px;
+}
+.search_box:hover .a{/* 展开位置为800-950-1100（0-50）*/
+    width: 300px;
+    padding: 0 3px;
+}
+.search_box:hover .b{ /* 展开后搜索显示 */
+    background-color: rgb(252, 252, 251);
+}
+.a{
+    border: none;
+    background: none;
+    /* 取消选中搜索框时的外边框 */
+    outline: none;
+    width: 0;
+    padding: 0;
+    transition: .4s;
+    line-height: 40px;
+    font-size: 20px;
+    color: rgb(250, 251, 251); /* 字体 */
+}
+.b{
+    color: #668de1; /* 未展开颜色 */
+    float: right;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #b4cae9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s;
+}
+.b_results {
+    position: absolute;
+    top: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    width: 300px;
+    background-color: #b4cae9;
+    border-radius: 10px;
+    padding: auto;
+    display: flex; 
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+}
+.user{
+    position: absolute;
+    top: 0%;
+    height: 50px;
+    left: 1170px;
+    width: 150px;
+    background-color: #72afd300;
+    display: flex;
+}
+.c{
+    top:2px;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background-color: #ffffff00; /* 默认头像背景色 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    cursor: auto;
+}
+.d{
+    width: 80px;
+    height: 50px;
+    left:10px;
+    background-color: rgba(255, 255, 255, 0);
+    display: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    white-space: nowrap; 
+    text-align: right;
+    cursor: auto;
+}
+.d:hover {
+    white-space: normal; /* 鼠标悬停时显示完整内容 */
+}
+
+.dropdown-menu {
+    display: none; /* 初始状态下隐藏下拉菜单 */
+    position: absolute; /* 绝对定位，相对于父元素 .user */
+    top: 100%; /* 位于父元素底部 */
+    right: 2px;
+    width: 200px;
+    background-color: #ffffff00; /* 背景颜色 */
+    border: 1px solid #ccccccb7; /* 边框 */
+    padding: 2px; /* 内边距 */
+}
+.dropdown-menu ul {
+    display: flex;
+    flex-direction: column; /* 竖直排列 */
+    align-items: center; /* 在交叉轴上居中对齐 */
+    font-size: 16px;
+}
+
+.dropdown-menu li {
+    margin-bottom: 5px; /* 在菜单项之间添加一些间距 */
+    list-style: none;
+}
+
+.dropdown-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.admin{
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    z-index: -1;
+}
+a {
+    text-decoration: none;
+    color: inherit; /* 使用父元素的颜色 */
+}

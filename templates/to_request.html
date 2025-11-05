@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>申请页面</title>
+</head>
+<body>
+    <h1>申请页面</h1>
+    <form action="/make_request" method="post">
+        <input type="submit" value="请求">
+    </form>
+    <form action="/CheckScoreUpdate" method="post">
+        <input type="submit" value="检查分数">
+    </form>
+    <form action="/CheckRequest" method="post">
+        <input type="submit" value="检查请求">
+    </form>
+    {% if tip %}
+    <script>
+        // 使用模板语言将接收到的变量内容传递给JavaScript
+        var variable = "{{ tip }}";
+        // 使用alert函数显示弹窗，弹窗中显示变量内容
+        alert(variable);
+    </script>
+    {% endif %}
+</body>
+</html>

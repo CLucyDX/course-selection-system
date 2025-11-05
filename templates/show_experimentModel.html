@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@3.4.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{{ url_for('static', filename='homeStyles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='student.css') }}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='navigation.js') }}"></script> 
+    <title>Web Design Mastery | Explore Destinations</title>
+  </head>
+  <body>
+    <div class="container">
+      <nav>
+        <div class="nav__logo">
+          <img src="{{ url_for('static', filename='uic.jpg') }}" alt="logo" />
+        </div>
+
+        <!-- 导航栏 -->
+        <ul class="nav__links">
+          <li class="link"><a href="{{ url_for('student.studentHomePage') }}">Home</a></li>
+          <li class="link"><a href="{{url_for('student.search')}}">Search By</a></li>
+          <li class="link"><a href="/CheckScoreUpdate?email={{ email }}">Check Request</a></li>
+          <li class="link"><a href="{{url_for('subrequest.submit_request',email = email)}}">Experiment Saving</a></li>
+          <li class="link"><a href="{{ url_for('request.index') }}">Log out</a></li>
+        </ul>
+
+        <!-- 搜索框 -->
+        <div class="search search_box">
+          <form id="search_form" action="/search" method="POST">
+            <input type="text" name="a" id="a" placeholder="Search">
+            <div id="b" name="b" onclick="submitSearch()"></div>
+          </form>
+          <div class="b_results"id="b_results"></div>
+        </div>
+
+        <!-- 头像和下拉框                           下拉框有问题-->
+        <div class="login">
+          <span><i class="ri-user-3-fill"></i></span>
+          {{ name }}
+          <div class="dropdown-icon">▼</div>
+          <div class="dropdown-menu">
+            <ul>
+                <li>Email: {{ email }}</li>
+                <li><a href="/CheckRequest?email={{ email }}">My Request</a></li>
+                <li><a href="{{ url_for('request.index') }}">Log out</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <div class="list__container">
+            <img class="bg__img__2" src="{{ url_for('static', filename='bg-arrow.png') }}" alt="bg" />
+            <div class="socials">
+            <span><i class="ri-twitter-fill"></i></span>
+            <span><i class="ri-facebook-fill"></i></span>
+            <span><i class="ri-instagram-line"></i></span>
+            <span><i class="ri-youtube-fill"></i></span>
+            </div>
+            <div class="list_content">
+                <h1>Experiment List</h1>
+              <p>You can double-click the picture to view it carefully</p>
+              <div class="detail_bg">
+                <div class="student2">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Experiment ID</th>
+                                <th>Question Text</th>
+                                <th>Course Name</th>
+                                <th>Course Category</th>
+                                <th>Answer</th>
+                                <th>LLM Type</th>
+                                <th>Reasoning Explanation</th>
+                                <th>Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entry in entries %}
+                            <tr>
+                                <td>{{ entry['e_id'] }}</td>
+                                <td>{{ entry['q_text'] }}</td>
+                                <td>{{ entry['course_name'] }}</td>
+                                <td>{{ entry['course_cat'] }}</td>
+                                <td>
+                                    {% set clean_filename = entry['answer'][8:] %}
+                                    <img src="{{ url_for('static', filename=clean_filename) }}" alt="Experiment Answer" style="width:100px;height:auto;" ondblclick="openImage('{{url_for('static', filename=clean_filename)}}')">
+                                    <!-- <p>验证图片的 src 属性值是: {{ url_for('static', filename=entry['answer']) }}</p> -->
+                                </td>
+                                
+                                <td>{{ entry['llmtype'] }}</td>
+                                <td>{{ entry['r_explanation'] }}</td>
+                                <td>{{ entry['score'] }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                        
+                    </table>
+                </div>
+
+              </div>
+            </div>
+      </div>
+    </div>
+
+    <script>
+        function openImage(imageUrl) {
+            window.open(imageUrl, '_blank');
+        }
+    </script>
+  </body>
+</html>

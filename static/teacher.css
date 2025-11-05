@@ -1,0 +1,309 @@
+.selection_card {
+    height: 100%;
+    background-color: var(--white);
+    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.7);
+}
+  
+.selection_card img {
+    width: 100%;
+    max-height: 40%;
+}
+  
+.selection_card_content {
+    padding: 1rem;
+}
+
+.selection_box {
+    width: 150px; 
+    margin-top: 5%;
+    font-size: 15px;
+}
+
+#result-list {
+    margin-left: 20px;
+}
+
+#result-list li{
+    color: black;
+    margin-bottom: 2px;
+}
+
+#result-list li:hover {
+    background-color: #7e7e7f48;
+    color: white;
+}
+
+#result-list li a{
+    color: black;
+    text-decoration: none;
+}
+
+.list__container {
+    position: relative;
+    padding: 5rem 0 5rem 5rem;
+    flex: 1;
+    display: grid;
+    gap: 2rem;
+    align-items: center;
+    /* border: 2px solid red; */
+    justify-items: center;
+}
+
+
+.list__container h1 {
+    margin-top: 0rem;
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--white);
+}
+  
+.list__container h1 span {
+    -webkit-text-stroke: 2px var(--white);
+    -webkit-text-fill-color: transparent;
+}
+  
+.list__container p {
+    max-width: 70%;
+    margin-bottom: 2rem;
+    line-height: 1.5rem;
+    color: var(--white);
+    font-size: 30px;
+}
+  
+.list__container .btn {
+    padding: 0.75rem 2rem;
+    outline: none;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.list_content {
+    overflow-y: auto;
+    text-align: center;
+}
+
+.list_content h1 {
+    margin: 0 auto;
+    font-size: 4.5rem;
+    font-weight: 800;
+    color: var(--white);
+    /* border: 2px solid red; */
+}
+  
+.list_content h1 span {
+    -webkit-text-stroke: 2px var(--white);
+    -webkit-text-fill-color: transparent;
+}
+  
+.list_content p {
+    max-width: 750px;
+    margin: 10px auto;
+    line-height: 1.5rem;
+    color: var(--white);
+}
+  
+.list_content .btn {
+    /* padding: 0.75rem 2rem; */
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    cursor: pointer;
+    display: block; /* 确保按钮是块级元素 */
+    margin: 5px auto; /* 自动左右边距 */
+}
+
+.list_content li a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    margin-left: 1rem;
+}
+
+
+.list_content li:hover {
+    background-color: #9e9e9e68;
+    color: white;
+}
+
+.list_bg {
+    width: 95%;
+    background: rgba(255, 255, 255, 0.5);
+    text-align: left;
+}
+
+.detail_bg {
+    /* border:  2px solid red; */
+    width: 100%;
+    background: rgba(255, 255, 255, 0.6);
+    text-align: left;
+    padding: 5px;
+}
+
+.detail_bg p {
+    font-size: 20px;
+    margin: 1% 2%;
+}
+
+.detail_bg h3, .detail_bg a, .detail_bg img {
+    margin: 1% 2%;
+}
+
+.detail_bg h3 {
+    font-size: 30px;
+}
+
+.detail_bg li {
+    text-align: center;
+}
+
+.detail_bg button {
+    font-size: 20px;
+    margin: 1% auto;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    width: 300px;
+    text-align: center;
+}
+
+.popup h2 {
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.popup button {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.popup button:hover {
+    background-color: var(--secondary-color);
+}
+
+.popup button.cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.popup button.cancel:hover {
+    background-color: #bbb;
+}
+
+.save-button {
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    background-color: var(--primary-color);
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.save-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.variation_link {
+    font-weight: bold;
+    font-size: 30px;
+    color: black;
+}
+
+/* .variation-container {
+    border: 2px solid red;
+} */
+
+/* CSS for the overall container */
+.list_bg {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Space between each variation-container */
+    padding: 1rem;
+    background-color: #f9f9f976;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* CSS for each variation container */
+.variation-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: #ffffff00;
+    border: 1px solid #ddd;
+    /* border-radius: 10px; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Aligning text within each div */
+.variation-container p {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: #333;
+}
+
+/* Specific styles for the text labels */
+.question, .llmstype, .answer, .score {
+    /* border: 2px solid red; */
+    font-weight: bold;
+    color: #555;
+    margin: 2% auto;
+}
+
+/* Style for the image link */
+.variation-container a {
+    display: block;
+    max-width: 100%;
+    text-align: center;
+}
+
+/* Add some hover effect for the container */
+.variation-container:hover {
+    background-color: #f1f1f1a2;
+    transition: background-color 0.3s ease;
+}
+
+/* Ensure images are responsive */
+.variation-container img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Adjust padding and margin for mobile view */
+/* @media (max-width: 600px) {
+    .variation-container {
+        grid-template-columns: 1fr;
+        padding: 0.5rem;
+    }
+} */
